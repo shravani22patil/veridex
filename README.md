@@ -75,6 +75,19 @@ The platform evaluates every tool request using:
 
 ---
 
+## 10x Solution Concepts
+
+| Capstone Concept | Veridex Implementation | Code Location |
+|---|---|---|
+| API Endpoints | REST APIs for authentication, agents, tools, permissions, policies, firewall, approvals and audit logs | `backend/app/` |
+| Database | Persistent PostgreSQL storage for users, agents, tools, permissions, policies, approvals and audit logs | `backend/app/database.py`, `backend/app/models/` |
+| Authentication | JWT-based authentication and protected API routes | `backend/app/auth.py`, `backend/app/dependencies.py` |
+| LLM Integration | Local LLM performs semantic security analysis | `backend/app/llm_security.py` |
+| Agent with Guardrails | Firewall intercepts agent tool requests and enforces ALLOW / ASK / BLOCK decisions | `backend/app/firewall.py` |
+| Containerized Stack | Frontend, backend and PostgreSQL run through Docker Compose | `docker-compose.yml`, `backend/Dockerfile`, `frontend/Dockerfile` |
+
+---
+
 ## Problem Statement
 
 AI agents are increasingly capable of performing actions through external tools.
