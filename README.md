@@ -14,6 +14,26 @@ The system produces one of three decisions:
 
 Every decision is recorded in an audit log for traceability.
 
+### Capstone Concept Swaps
+
+Veridex implements four concepts from the primary concept list:
+
+- API endpoints
+- Database
+- Authentication
+- LLM integration
+
+Two concepts were replaced with permitted capstone swaps:
+
+- **Agent with guardrails** — directly matches Veridex's core purpose of controlling AI-agent tool usage at runtime.
+- **Containerized stack** — provides a reproducible way to run the frontend, backend and PostgreSQL components together.
+
+Background jobs, reporting and caching were not central to the runtime security problem and were therefore not included.
+
+## Non-Goal
+
+Veridex does not attempt to provide unrestricted execution of real-world external actions. The current capstone focuses on the runtime security decision layer, approval workflow and auditability, with tool execution kept controlled/simulated for demonstration.
+
 ---
 
 ## Table of Contents
@@ -85,6 +105,11 @@ The platform evaluates every tool request using:
 | LLM Integration | Local LLM performs semantic security analysis | `backend/app/llm_security.py` |
 | Agent with Guardrails | Firewall intercepts agent tool requests and enforces ALLOW / ASK / BLOCK decisions | `backend/app/firewall.py` |
 | Containerized Stack | Frontend, backend and PostgreSQL run through Docker Compose | `docker-compose.yml`, `backend/Dockerfile`, `frontend/Dockerfile` |
+
+
+## 10x Claim
+
+Veridex makes AI-agent tool security easier to manage by centralizing request inspection, policy enforcement, human approval and audit logging in one runtime control layer instead of requiring each AI agent to implement these controls independently.
 
 ---
 
@@ -1425,6 +1450,13 @@ Stop the stack:
 ```powershell
 docker compose down
 ```
+
+## Service Address
+Frontend:	```http://localhost:5173```
+Backend API:	```http://localhost:8001```
+Swagger / OpenAPI:	```http://localhost:8001/docs```
+PostgreSQL:	```localhost:5433```
+Ollama:	```http://localhost:11434```
 
 ---
 
